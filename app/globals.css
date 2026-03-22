@@ -1,0 +1,198 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+/* Custom theme configuration */
+@theme {
+  /* Custom colors */
+  --color-dark-bg: #0a0e27;
+  --color-dark-secondary: #1a1f3a;
+  --color-dark-tertiary: #252d47;
+  --color-neon-cyan: #00d9ff;
+  --color-neon-blue: #0096ff;
+  --color-neon-purple: #d946ef;
+  --color-neon-pink: #ec4899;
+  --color-glow-cyan: rgba(0, 217, 255, 0.1);
+  --color-glow-blue: rgba(0, 150, 255, 0.1);
+  
+  /* Font families */
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  
+  /* CSS variables for theme */
+  --background: #0a0e27;
+  --foreground: #f5f7ff;
+  --card: #1a1f3a;
+  --card-foreground: #f5f7ff;
+  --popover: #1a1f3a;
+  --popover-foreground: #f5f7ff;
+  --primary: #00d9ff;
+  --primary-foreground: #0a0e27;
+  --secondary: #0096ff;
+  --secondary-foreground: #f5f7ff;
+  --muted: #2a2f4a;
+  --muted-foreground: #a0a0b8;
+  --accent: #d946ef;
+  --accent-foreground: #0a0e27;
+  --destructive: #ef4444;
+  --destructive-foreground: #f5f7ff;
+  --border: #2a2f4a;
+  --input: #1a1f3a;
+  --ring: #00d9ff;
+  --radius: 0.625rem;
+  
+  /* Map colors for shadcn/ui compatibility */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  /* Border radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Keyframes */
+  @keyframes glow-pulse {
+    0%, 100% { text-shadow: 0 0 10px rgba(0, 217, 255, 0.5); }
+    50% { text-shadow: 0 0 20px rgba(0, 217, 255, 0.8); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes slide-in {
+    0% { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes glow-box {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(0, 217, 255, 0.6); }
+  }
+  
+  /* Animations */
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-slide-in: slide-in 0.6s ease-out;
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-glow-box: glow-box 2s ease-in-out infinite;
+}
+
+/* Dark mode variant */
+@custom-variant dark (&:is(.dark *));
+
+/* Base styles */
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
+  }
+  
+  body {
+    background-color: var(--color-dark-bg);
+    color: var(--foreground);
+  }
+}
+
+/* Custom components using @layer components instead of @utility for complex styles */
+@layer components {
+  .glow-text {
+    color: var(--color-neon-cyan);
+    text-shadow: 0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(0, 217, 255, 0.3);
+  }
+
+  .glow-box {
+    border: 1px solid color-mix(in srgb, var(--color-neon-cyan) 30%, transparent);
+    background-color: color-mix(in srgb, var(--color-dark-secondary) 50%, transparent);
+    backdrop-filter: blur(8px);
+    box-shadow: inset 0 0 20px rgba(0, 217, 255, 0.1), 0 0 30px rgba(0, 217, 255, 0.2);
+  }
+
+  .gradient-text {
+    background: linear-gradient(to right, var(--color-neon-cyan), var(--color-neon-blue), var(--color-neon-purple));
+    background-clip: text;
+    color: transparent;
+  }
+
+  .smooth-transition {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+
+  .btn-glow {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .btn-glow:hover {
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.6);
+  }
+
+  .scroll-reveal {
+    animation: scrollReveal 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease-out;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-5px);
+  }
+
+  .animated-gradient {
+    background-size: 200% 200%;
+    animation: animatedGradient 4s ease infinite;
+  }
+}
+
+/* Additional keyframes that need to be at root level */
+@keyframes scrollReveal {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes animatedGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
