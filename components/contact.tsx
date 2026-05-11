@@ -23,19 +23,19 @@ export function Contact() {
     {
       icon: Mail,
       title: 'Email',
-      value: 'hello@developer.com',
-      href: 'mailto:hello@developer.com',
+      value: 'james500muniu@gmail.com',
+      href: 'mailto:james500muniu@gmail.com' 
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
+      value: '+2 (547) 00-747076',
+      href: 'tel:+254700747076',
     },
     {
       icon: MapPin,
       title: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Nairobi, Kenya',
       href: '#',
     },
     {
@@ -45,6 +45,7 @@ export function Contact() {
       href: '#',
     },
   ]
+ 
 
   return (
     <section id="contact" className="relative bg-dark-secondary py-24 sm:py-32">
@@ -103,7 +104,7 @@ export function Contact() {
               })}
 
               {/* Social links */}
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -128,7 +129,7 @@ export function Contact() {
                     </motion.a>
                   ))}
                 </div>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
 
             {/* Contact form */}

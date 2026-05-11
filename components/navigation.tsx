@@ -28,7 +28,7 @@ export function Navigation() {
           className="flex items-center gap-2 cursor-pointer"
         >
           <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-neon-cyan to-neon-blue" />
-          <span className="text-xl font-bold text-neon-cyan">Dev</span>
+          <span className="text-xl font-bold text-neon-cyan">JN</span>
         </motion.div>
 
         {/* Desktop Menu */}

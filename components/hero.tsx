@@ -26,6 +26,25 @@ export function Hero() {
     },
   }
 
+  // Replace these with your actual URLs
+  const socialLinks = [
+    { 
+      icon: Github, 
+      label: 'GitHub', 
+      href: 'https://github.com/jamesnju' // Replace with your GitHub profile URL
+    },
+    { 
+      icon: Linkedin, 
+      label: 'LinkedIn', 
+      href: 'https://www.linkedin.com/in/james-muniu-33a92a234/' // Replace with your LinkedIn profile URL
+    },
+    { 
+      icon: Mail, 
+      label: 'Email', 
+      href: 'mailto:james500muniu@gmail.com' // Replace with your email address
+    },
+  ]
+
   return (
     <section className="relative min-h-screen overflow-hidden bg-dark-bg pt-20">
       {/* Animated background elements */}
@@ -100,14 +119,12 @@ export function Hero() {
             variants={itemVariants}
             className="flex gap-6 pt-8"
           >
-            {[
-              { icon: Github, label: 'GitHub', href: '#' },
-              { icon: Linkedin, label: 'LinkedIn', href: '#' },
-              { icon: Mail, label: 'Email', href: '#contact' },
-            ].map((social) => (
+            {socialLinks.map((social) => (
               <motion.a
                 key={social.label}
                 href={social.href}
+                target={social.label !== 'Email' ? "_blank" : undefined}
+                rel={social.label !== 'Email' ? "noopener noreferrer" : undefined}
                 whileHover={{ scale: 1.2, rotate: 10 }}
                 whileTap={{ scale: 0.9 }}
                 className="group relative h-12 w-12 rounded-lg border border-neon-cyan/30 flex items-center justify-center bg-dark-secondary/50 transition-all hover:bg-neon-cyan/10 hover:border-neon-cyan/60"

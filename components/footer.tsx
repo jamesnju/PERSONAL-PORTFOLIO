@@ -14,11 +14,24 @@ export function Footer() {
     { label: 'Contact', href: '#contact' },
   ]
 
-  const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:hello@developer.com', label: 'Email' },
-  ]
+
+   const socialLinks = [
+      { 
+        icon: Github, 
+        label: 'GitHub', 
+        href: 'https://github.com/jamesnju' 
+      },
+      { 
+        icon: Linkedin, 
+        label: 'LinkedIn', 
+        href: 'https://www.linkedin.com/in/james-muniu-33a92a234/' 
+      },
+      { 
+        icon: Mail, 
+        label: 'Email', 
+        href: 'mailto:james500muniu@gmail.com' 
+      },
+    ]
 
   return (
     <footer className="relative border-t border-neon-cyan/20 bg-dark-bg/95 backdrop-blur-sm">
@@ -46,7 +59,7 @@ export function Footer() {
                 whileHover={{ scale: 1.1, rotate: 10 }}
                 className="h-10 w-10 rounded-lg bg-gradient-to-br from-neon-cyan to-neon-blue"
               />
-              <span className="text-xl font-bold text-neon-cyan">DevPortfolio</span>
+              <span className="text-xl font-bold text-neon-cyan">JamesPortfolio</span>
             </div>
             <p className="text-sm text-foreground/60">
               Building digital experiences with modern technologies and creative solutions.
@@ -128,7 +141,7 @@ export function Footer() {
           className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between text-sm text-foreground/60"
         >
           <p>
-            © {currentYear} Developer Portfolio. Designed with care and built with modern technologies.
+            © {currentYear} James Portfolio. Designed with care and built with modern technologies.
           </p>
           <motion.div className="flex gap-6">
             <a href="#" className="hover:text-neon-cyan transition-colors">
