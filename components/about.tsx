@@ -1,386 +1,357 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { ScrollReveal } from './scroll-reveal'
-import { useEffect, useState } from 'react'
-import { Briefcase, Smartphone, Code2, Users } from 'lucide-react'
+import { motion, useInView } from 'framer-motion'
+import { useEffect, useState, useRef } from 'react'
+import Image from 'next/image'
+import { 
+  Code2, 
+  Users, 
+  Database,
+  Smartphone,
+  Headphones,
+  Shield,
+  ArrowRight,
+  Star,
+  Briefcase,
+  GraduationCap,
+  Sparkles
+} from 'lucide-react'
 
 export function About() {
   const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 })
 
   useEffect(() => {
     const checkDevice = () => {
-      const width = window.innerWidth
-      setIsMobile(width < 640)
-      setIsTablet(width >= 640 && width < 1024)
+      setIsMobile(window.innerWidth < 640)
     }
-    
     checkDevice()
     window.addEventListener('resize', checkDevice)
     return () => window.removeEventListener('resize', checkDevice)
   }, [])
 
-  return (
-    <section id="about" className="relative bg-dark-bg py-16 sm:py-24 lg:py-32 overflow-hidden">
-      {/* Background accent - responsive sizing */}
-      <motion.div
-        className="absolute -right-20 top-1/2 h-48 w-48 sm:h-64 sm:w-64 lg:h-96 lg:w-96 rounded-full bg-neon-blue/10 blur-3xl"
-        animate={{
-          x: [0, 30, 0],
-          y: [0, -30, 0],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-      />
+  // Professional journey timeline
+  const journeySteps = [
+    { 
+      year: '2020',
+      title: 'Started Development',
+      description: 'Began my software development journey with web technologies'
+    },
+    { 
+      year: '2022',
+      title: 'Full-Stack Expertise',
+      description: 'Mastered backend APIs and frontend integrations'
+    },
+    { 
+      year: '2023',
+      title: 'Implementation Engineer',
+      description: 'Joined FINTECH-group Kenya as Implementation & Support Engineer'
+    },
+    { 
+      year: '2024',
+      title: 'Payment Solutions',
+      description: 'Specializing in payment system implementation and client training'
+    },
+  ]
 
-      {/* Additional background glow for mobile */}
-      <motion.div
-        className="absolute -left-20 bottom-0 h-40 w-40 sm:h-56 sm:w-56 rounded-full bg-neon-cyan/5 blur-2xl lg:hidden"
-        animate={{
-          x: [0, -20, 0],
-          y: [0, 20, 0],
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-      />
+  const coreSkills = [
+    { 
+      icon: Database, 
+      title: 'API Development', 
+      description: 'Building robust RESTful & GraphQL APIs',
+      color: 'from-blue-500 to-cyan-500'
+    },
+    { 
+      icon: Code2, 
+      title: 'Frontend Integration', 
+      description: 'React, Next.js, TypeScript expertise',
+      color: 'from-purple-500 to-pink-500'
+    },
+    { 
+      icon: Smartphone, 
+      title: 'Android Development', 
+      description: 'Native mobile experiences with Kotlin',
+      color: 'from-green-500 to-emerald-500'
+    },
+    { 
+      icon: Shield, 
+      title: 'Payment Solutions', 
+      description: 'Implementation & technical support',
+      color: 'from-orange-500 to-red-500'
+    },
+    { 
+      icon: Headphones, 
+      title: 'Technical Support', 
+      description: 'Client training & issue resolution',
+      color: 'from-indigo-500 to-blue-500'
+    },
+    { 
+      icon: Users, 
+      title: 'System Implementation', 
+      description: 'Deployment & client success',
+      color: 'from-pink-500 to-rose-500'
+    },
+  ]
+
+  return (
+    <section 
+      ref={sectionRef}
+      id="about" 
+      className="relative min-h-screen py-16 sm:py-24 lg:py-32 overflow-hidden"
+    >
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0">
+        <div className="relative w-full h-full">
+          <Image
+            src="/james2.jpg"
+            alt="James Muniu - Software Developer & Implementation Engineer"
+            fill
+            className="object-cover object-center"
+            priority
+            quality={100}
+          />
+          {/* Gradient overlays for readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a1a]/95 via-[#0a0a1a]/85 to-[#0a0a1a]/95" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a1a]/90 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a]/95 via-transparent to-[#0a0a1a]/60" />
+          
+          {/* Animated accent overlay */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5"
+            animate={{
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+      </div>
+
+      {/* Animated glow effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16 items-start">
-            {/* Content */}
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }} 
-              whileInView={{ opacity: 1, x: 0 }} 
-              transition={{ duration: 0.8 }}
-              className="order-2 lg:order-1"
-            >
-              <h2 className="mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl font-bold">
-                <span className="gradient-text">About Me</span>
-              </h2>
-
-              {/* Role Badge - New */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="mb-4 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-neon-cyan/30 bg-neon-cyan/10 px-3 sm:px-4 py-1.5 sm:py-2"
-              >
-                <Briefcase size={isMobile ? 14 : 16} className="text-neon-cyan" />
-                <span className="text-xs sm:text-sm font-medium text-neon-cyan">
-                  Implementation & Support Engineer @ FINTECH-group Kenya
-                </span>
-              </motion.div>
-
-              <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-foreground/80 leading-relaxed">
-                <p>
-                  {isMobile ? (
-                    "I'm a passionate developer currently working as an Implementation and Support Engineer at FINTECH-group Kenya, and also building Android apps."
-                  ) : (
-                    "I'm a passionate developer currently working as an Implementation and Support Engineer at FINTECH-group Kenya, where I help deploy and maintain financial technology solutions. I also build Android apps, combining my love for mobile development with full-stack expertise."
-                  )}
-                </p>
-
-                <p>
-                  {isMobile ? (
-                    "I specialize in full-stack development, Android apps, and system implementations."
-                  ) : isTablet ? (
-                    "My journey spans full-stack web development, Android app development, and system implementation. I specialize in building robust APIs, interactive front-end interfaces, scalable backend systems, and native mobile experiences."
-                  ) : (
-                    "My journey in software development spans across full-stack web development, Android app development, and system implementation. I specialize in building robust APIs, interactive front-end interfaces, scalable backend systems, and native mobile experiences that solve real-world problems."
-                  )}
-                </p>
-
-                {!isMobile && (
-                  <p>
-                    At FINTECH-group Kenya, I work on implementing and supporting financial technology solutions that empower businesses and individuals. When I'm not coding, I explore new technologies, contribute to open-source projects, and share knowledge with the developer community.
-                  </p>
-                )}
-              </div>
-
-              {/* Specializations - New */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="mt-6 sm:mt-8 grid grid-cols-2 gap-3 sm:gap-4"
-              >
-                {[
-                  { icon: Code2, label: 'Full-Stack Web' },
-                  { icon: Smartphone, label: 'Android Apps' },
-                  { icon: Briefcase, label: 'System Implementation' },
-                  { icon: Users, label: 'Support & Training' },
-                ].map((item, i) => {
-                  const Icon = item.icon
-                  return (
-                    <motion.div
-                      key={i}
-                      whileHover={{ scale: 1.05, borderColor: 'rgba(0, 217, 255, 0.6)' }}
-                      className="flex items-center gap-2 sm:gap-3 rounded-lg border border-neon-cyan/20 bg-dark-secondary/30 p-2 sm:p-3 transition-all"
-                    >
-                      <div className="rounded-lg bg-neon-cyan/10 p-1.5 sm:p-2">
-                        <Icon size={isMobile ? 14 : 18} className="text-neon-cyan" />
-                      </div>
-                      <span className="text-xs sm:text-sm font-medium text-foreground/80">
-                        {item.label}
-                      </span>
-                    </motion.div>
-                  )
-                })}
-              </motion.div>
-
-              {/* Stats - responsive grid */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8"
-              >
-                {[
-                  { number: '50+', label: 'Projects' },
-                  { number: '5+', label: 'Years Experience' },
-                  { number: '100%', label: 'Dedication' },
-                ].map((stat, i) => (
-                  <motion.div 
-                    key={i} 
-                    className="space-y-1 sm:space-y-2"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neon-cyan">
-                      {stat.number}
-                    </div>
-                    <div className="text-xs sm:text-sm text-foreground/60">
-                      {stat.label}
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-
-              {/* CTA for mobile */}
-              {isMobile && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="mt-6"
-                >
-                  <a 
-                    href="#projects" 
-                    className="inline-block w-full sm:w-auto text-center px-6 py-3 bg-neon-cyan text-dark-bg font-semibold rounded-lg hover:shadow-lg hover:shadow-neon-cyan/50 transition-all"
-                  >
-                    View My Work
-                  </a>
-                </motion.div>
-              )}
-            </motion.div>
-
-            {/* Visual element - responsive sizing and positioning */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="relative order-1 lg:order-2"
-            >
-              <div className="glow-box aspect-square overflow-hidden rounded-xl max-w-sm sm:max-w-md lg:max-w-full mx-auto lg:mx-0">
-                <motion.div
-                  animate={{
-                    backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-                  }}
-                  transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-                  className="animated-gradient h-full w-full bg-gradient-to-br from-neon-cyan/20 via-neon-blue/20 to-neon-purple/20"
-                />
-
-                {/* Overlay content - New */}
-                <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                    className="text-center"
-                  >
-                    <div className="mb-2 sm:mb-4 text-2xl sm:text-4xl lg:text-5xl font-bold text-neon-cyan">
-                      FINTECH
-                    </div>
-                    <div className="text-xs sm:text-sm lg:text-base text-foreground/60">
-                      Implementation & Support
-                    </div>
-                    <div className="mt-1 sm:mt-2 text-xs sm:text-sm lg:text-base text-foreground/60">
-                      + Android Development
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Floating elements - responsive count and size */}
-              {!isMobile && [...Array(3)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className={`absolute h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 rounded-lg border border-neon-cyan/20 bg-dark-secondary/30 backdrop-blur-md flex items-center justify-center text-2xl sm:text-3xl lg:text-4xl`}
-                  animate={{
-                    y: [0, -20, 0],
-                    x: [0, 10, 0],
-                    rotate: [0, 10, 0],
-                  }}
-                  transition={{
-                    duration: 4 + i,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  style={{
-                    top: `${20 + i * 25}%`,
-                    right: `${10 + i * 15}%`,
-                  }}
-                >
-                  {['💼', '📱', '⚡'][i]}
-                </motion.div>
-              ))}
-
-              {/* Mobile floating elements - smaller and fewer */}
-              {isMobile && [...Array(2)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute h-10 w-10 rounded-lg border border-neon-cyan/20 bg-dark-secondary/30 backdrop-blur-md flex items-center justify-center text-xl"
-                  animate={{
-                    y: [0, -15, 0],
-                    x: [0, 8, 0],
-                    rotate: [0, 8, 0],
-                  }}
-                  transition={{
-                    duration: 3 + i,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  style={{
-                    top: `${30 + i * 30}%`,
-                    right: `${5 + i * 20}%`,
-                  }}
-                >
-                  {['💼', '📱'][i]}
-                </motion.div>
-              ))}
-
-              {/* Decorative dots - mobile only */}
-              {isMobile && (
-                <div className="absolute -bottom-4 -left-4 flex gap-2">
-                  {[...Array(3)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="h-2 w-2 rounded-full bg-neon-cyan/30"
-                      style={{ animationDelay: `${i * 0.2}s` }}
-                    />
-                  ))}
-                </div>
-              )}
-            </motion.div>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 sm:mb-16 lg:mb-20"
+        >
+          <div className="inline-flex items-center gap-2 text-blue-400 text-sm font-medium mb-3">
+            <span className="w-8 h-px bg-blue-400" />
+            WHO I AM
+            <span className="w-8 h-px bg-blue-400" />
           </div>
-        </ScrollReveal>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+            About <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Me</span>
+          </h2>
+          <p className="mt-3 text-white/60 max-w-2xl mx-auto text-base sm:text-lg">
+            Software Developer & Implementation Support Engineer
+          </p>
+        </motion.div>
+
+        {/* Professional Summary Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="relative bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 p-6 sm:p-8 lg:p-12 mb-12"
+        >
+          <div className="grid lg:grid-cols-5 gap-6 lg:gap-10 items-start">
+            {/* Photo */}
+            <div className="lg:col-span-2">
+              <div className="relative aspect-square max-w-[300px] mx-auto lg:mx-0 rounded-2xl overflow-hidden border-2 border-blue-500/20 shadow-lg shadow-blue-500/10">
+                <Image
+                  src="/james2.jpg"
+                  alt="James Muniu - Software Developer & Implementation Engineer"
+                  fill
+                  className="object-cover object-center"
+                  quality={100}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                  <div className="text-lg font-bold">James Muniu</div>
+                  <div className="text-xs text-white/80">Software Developer & Implementation Engineer</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="lg:col-span-3 space-y-4">
+              <div className="flex items-center gap-2 text-sm text-blue-400">
+                <Briefcase size={16} />
+                <span className="font-medium">Currently at FINTECH-group Kenya</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-white">
+                Building Solutions,<br />
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Creating Impact
+                </span>
+              </h3>
+              <p className="text-white/70 leading-relaxed">
+                {isMobile ? (
+                  <>
+                    I'm a <span className="font-medium text-blue-400">Software Developer</span> and{' '}
+                    <span className="font-medium text-purple-400">Implementation Support Engineer</span>
+                    {' '}passionate about building robust web APIs, seamless integrations, and delivering exceptional client support.
+                  </>
+                ) : (
+                  <>
+                    I'm a <span className="font-medium text-blue-400">Software Developer</span> and{' '}
+                    <span className="font-medium text-purple-400">Implementation Support Engineer</span>
+                    {' '}with a passion for building robust web APIs, seamless frontend integrations, and delivering exceptional 
+                    client support. I specialize in payment solution implementation, system deployment, and technical training, 
+                    ensuring smooth transitions and ongoing client success.
+                  </>
+                )}
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {['API Development', 'Frontend Integration', 'Payment Solutions', 'Technical Support'].map((skill) => (
+                  <span 
+                    key={skill}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-xs sm:text-sm text-white/80 border border-white/10"
+                  >
+                    <Star size={12} className="text-blue-400" />
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Skills Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-12"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <Code2 size={24} className="text-blue-400" />
+            <h3 className="text-xl font-semibold text-white">
+              Core Expertise
+            </h3>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {coreSkills.map((skill, index) => {
+              const Icon = skill.icon
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  whileHover={{ 
+                    y: -4,
+                    transition: { type: "spring", stiffness: 300 }
+                  }}
+                  className="group relative bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-4 sm:p-6 hover:border-blue-400/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`p-2 rounded-xl bg-gradient-to-r ${skill.color} bg-opacity-10`}>
+                      <Icon size={isMobile ? 18 : 22} className="text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-white mb-1">
+                        {skill.title}
+                      </h4>
+                      <p className="text-xs text-white/50">
+                        {skill.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
+        </motion.div>
+
+        {/* Journey Timeline */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <GraduationCap size={24} className="text-purple-400" />
+            <h3 className="text-xl font-semibold text-white">
+              Professional Journey
+            </h3>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {journeySteps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                className="relative group"
+              >
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-4 sm:p-6 hover:border-purple-400/30 transition-all duration-300">
+                  <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+                    {step.year}
+                  </div>
+                  <h4 className="text-sm font-semibold text-white mb-1">
+                    {step.title}
+                  </h4>
+                  <p className="text-xs text-white/50">
+                    {step.description}
+                  </p>
+                </div>
+                {index < journeySteps.length - 1 && !isMobile && (
+                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-blue-400 to-purple-400" />
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Availability Badge & CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-10 sm:mt-12 text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-6">
+            <Sparkles size={14} className="text-blue-400" />
+            <span className="text-sm text-white/60">
+              Available for opportunities
+            </span>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+            </span>
+          </div>
+          
+          <a 
+            href="#contact"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-600 shadow-lg shadow-blue-500/25 transition-all duration-300 group"
+          >
+            <span>Let's Connect</span>
+            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </a>
+        </motion.div>
       </div>
     </section>
   )
 }
-
-// 'use client'
-
-// import { motion } from 'framer-motion'
-// import { ScrollReveal } from './scroll-reveal'
-
-// export function About() {
-//   return (
-//     <section id="about" className="relative bg-dark-bg py-24 sm:py-32">
-//       {/* Background accent */}
-//       <motion.div
-//         className="absolute -right-20 top-1/2 h-96 w-96 rounded-full bg-neon-blue/10 blur-3xl"
-//         animate={{
-//           x: [0, 30, 0],
-//           y: [0, -30, 0],
-//         }}
-//         transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-//       />
-
-//       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-//         <ScrollReveal>
-//           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-//             {/* Content */}
-//             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
-//               <h2 className="mb-6 text-4xl font-bold sm:text-5xl">
-//                 <span className="gradient-text">About Me</span>
-//               </h2>
-
-//               <div className="space-y-6 text-lg text-foreground/80 leading-relaxed">
-//                 <p>
-//                   I'm a passionate full-stack developer with a deep love for creating elegant solutions to complex problems. With expertise in modern web technologies, I build applications that are not just functional but also delightful to use.
-//                 </p>
-
-//                 <p>
-//                   My journey in software development spans across multiple technologies and frameworks. I specialize in building robust APIs, interactive front-end interfaces, and scalable backend systems.
-//                 </p>
-
-//                 <p>
-//                   When I'm not coding, I'm exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community. Let's build something amazing together.
-//                 </p>
-//               </div>
-
-//               {/* Stats */}
-//               <motion.div
-//                 initial={{ opacity: 0, y: 20 }}
-//                 whileInView={{ opacity: 1, y: 0 }}
-//                 transition={{ duration: 0.8, delay: 0.2 }}
-//                 className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-3"
-//               >
-//                 {[
-//                   { number: '50+', label: 'Projects' },
-//                   { number: '5+', label: 'Years Experience' },
-//                   { number: '100%', label: 'Dedication' },
-//                 ].map((stat, i) => (
-//                   <div key={i} className="space-y-2">
-//                     <div className="text-3xl font-bold text-neon-cyan">{stat.number}</div>
-//                     <div className="text-sm text-foreground/60">{stat.label}</div>
-//                   </div>
-//                 ))}
-//               </motion.div>
-//             </motion.div>
-
-//             {/* Visual element */}
-//             <motion.div
-//               initial={{ opacity: 0, scale: 0.9 }}
-//               whileInView={{ opacity: 1, scale: 1 }}
-//               transition={{ duration: 0.8 }}
-//               className="relative"
-//             >
-//               <div className="glow-box aspect-square overflow-hidden rounded-xl">
-//                 <motion.div
-//                   animate={{
-//                     backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-//                   }}
-//                   transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-//                   className="animated-gradient h-full w-full bg-gradient-to-br from-neon-cyan/20 via-neon-blue/20 to-neon-purple/20"
-//                 />
-//               </div>
-
-//               {/* Floating elements */}
-//               {[...Array(3)].map((_, i) => (
-//                 <motion.div
-//                   key={i}
-//                   className={`absolute h-20 w-20 rounded-lg border border-neon-cyan/20 bg-dark-secondary/30 backdrop-blur-md`}
-//                   animate={{
-//                     y: [0, -20, 0],
-//                     x: [0, 10, 0],
-//                     rotate: [0, 10, 0],
-//                   }}
-//                   transition={{
-//                     duration: 4 + i,
-//                     repeat: Infinity,
-//                     ease: 'easeInOut',
-//                   }}
-//                   style={{
-//                     top: `${20 + i * 25}%`,
-//                     right: `${10 + i * 15}%`,
-//                   }}
-//                 />
-//               ))}
-//             </motion.div>
-//           </div>
-//         </ScrollReveal>
-//       </div>
-//     </section>
-//   )
-// }
